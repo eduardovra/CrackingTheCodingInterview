@@ -8,7 +8,9 @@ class LinkedList:
     def __init__(self, values: list) -> None:
         self.head = None
 
-        if values:
+        if isinstance(values, LinkedListNode):
+            self.head = values
+        elif values:
             self.head = cur_node = LinkedListNode(values.pop(0))
 
             for value in values:
