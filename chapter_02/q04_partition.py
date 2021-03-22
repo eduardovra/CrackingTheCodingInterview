@@ -1,5 +1,6 @@
 from linked_list import LinkedList
 
+# O(n)
 def partition(linked_list: LinkedList, value: int) -> LinkedList:
     # Start a new linked list with the first element from the input list
     head = linked_list.head
