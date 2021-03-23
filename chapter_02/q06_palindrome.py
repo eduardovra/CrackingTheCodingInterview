@@ -15,6 +15,7 @@ class Stack:
         self.top = self.top.next
         return data
 
+# O(n)
 def is_palindrome(linked_list: LinkedList) -> bool:
     stack = Stack()
     node = linked_list.head
@@ -30,6 +31,8 @@ def is_palindrome(linked_list: LinkedList) -> bool:
         node = node.next
 
     return True
+
+# TODO Implement using recursion
 
 assert is_palindrome(LinkedList([1,2,3,2,1])) is True
 assert is_palindrome(LinkedList([1,2,2,1])) is True

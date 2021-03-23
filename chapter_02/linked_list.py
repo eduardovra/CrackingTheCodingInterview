@@ -7,6 +7,7 @@ class LinkedListNode:
 class LinkedList:
     def __init__(self, values: list) -> None:
         self.head = None
+        self.tail = None
 
         if isinstance(values, LinkedListNode):
             self.head = values
@@ -16,6 +17,12 @@ class LinkedList:
             for value in values:
                 cur_node.next = LinkedListNode(value)
                 cur_node = cur_node.next
+
+        # Find tail
+        node = self.head
+        while node:
+            self.tail = node
+            node = node.next
 
     def to_list(self) -> list:
         l = []
