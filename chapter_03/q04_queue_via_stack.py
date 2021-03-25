@@ -25,29 +25,36 @@ class Stack:
 
 class QueueViaStack:
     def __init__(self) -> None:
-        self.stack = Stack()
-        self.temp_stack = Stack()
+        self.add_stack = Stack()
+        self.rem_stack = Stack()
 
     def add(self, value):
-        while not self.stack.is_empty():
-            data = self.stack.pop()
-            self.temp_stack.push(data)
-
-        self.stack.push(value)
-
-        while not self.temp_stack.is_empty():
-            data = self.temp_stack.pop()
-            self.stack.push(data)
+        while not self.rem_stack.is_empty():
+            data = self.rem_stack.pop()
+            self.add_stack.push(data)
+        self.add_stack.push(value)
 
     def remove(self):
-        return self.stack.pop()
+        while not self.add_stack.is_empty():
+            data = self.add_stack.pop()
+            if self.add_stack.is_empty():
+                return data # Last element
+            self.rem_stack.push(data)
+
+        return self.rem_stack.pop()
 
 queue = QueueViaStack()
 queue.add(1)
 queue.add(2)
 queue.add(3)
+queue.add(4)
 assert queue.remove() == 1
 assert queue.remove() == 2
-queue.add(4)
+queue.add(5)
+queue.add(6)
 assert queue.remove() == 3
+queue.add(7)
 assert queue.remove() == 4
+assert queue.remove() == 5
+assert queue.remove() == 6
+assert queue.remove() == 7
