@@ -55,9 +55,50 @@ class BinaryTree:
     def find(self, value):
         return self._find_recursive(self.root, value)
 
+    def _delete_recursive(self, node, parent, value):
+        if node.left and self._delete_recursive(node.left, node, value):
+            return True
+
+        if node.data == value:
+            # Found node
+            if not node.left and not node.right:
+                # Node has no children
+                if node is parent.left:
+                    parent.left = None
+                    self.length -= 1
+                    return True
+                else:
+                    parent.right = None
+                    self.length -= 1
+                    return True
+            elif node.left:
+                # Node has children only in left branch
+                if node is parent.left:
+                    parent.left = node.left
+                    self.length -= 1
+                    return True
+                else:
+                    parent.right = node.left
+                    self.length -= 1
+                    return True
+            else:
+                # Node has children only in right branch
+                if node is parent.left:
+                    parent.left = node.right
+                    self.length -= 1
+                    return True
+                else:
+                    parent.right = node.right
+                    self.length -= 1
+                    return True
+
+        if node.right and self._delete_recursive(node.right, node, value):
+            return True
+
+        return False
+
     def delete(self, value):
-        node = self.find(value)
-        # TODO
+        self._delete_recursive(self.root, None, value)
 
     def _get_node_depth(self, node, depth):
         if depth == 0:
