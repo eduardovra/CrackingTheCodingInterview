@@ -32,6 +32,7 @@ class CallCenter:
         elif isinstance(employee, Director):
             self.directors.add(employee)
 
+
 class Employee:
     def __init__(self, name) -> None:
         self.name = name
@@ -39,27 +40,31 @@ class Employee:
     def __repr__(self) -> str:
         return f"{self.__class__.__name__} {self.name}"
 
+
 class Respondent(Employee):
     pass
 
+
 class Manager(Employee):
     pass
+
 
 class Director(Employee):
     pass
 
 
 respondents = (
-    Respondent('John'), Respondent('Brad'), Respondent('Maria'),
+    Respondent("John"),
+    Respondent("Brad"),
+    Respondent("Maria"),
 )
 
 managers = (
-    Manager('Megan'), Manager('Olivia'),
+    Manager("Megan"),
+    Manager("Olivia"),
 )
 
-directors = (
-    Director('Kurt'),
-)
+directors = (Director("Kurt"),)
 
 cc = CallCenter(respondents, managers, directors)
 
